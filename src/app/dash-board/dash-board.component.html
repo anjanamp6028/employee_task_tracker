@@ -1,0 +1,69 @@
+<app-header [homeButton]="false"></app-header>
+<div class="animated fadeIn card main-content">
+    <div class="card-body">
+
+        <p-table #dt1 [value]="employeeList" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading"
+            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['name','phone','email']">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    <span> Employees ({{employeeList.length}})</span>
+                    <span class="dataTables_filter p-input-icon-right">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            Name
+                            <p-columnFilter pSortableColumn="name" type="text" field="name" display="menu">
+                                <p-sortIcon field="name"></p-sortIcon>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            Email
+                            <p-columnFilter pSortableColumn="phone" type="text" field="phone" display="menu">
+                                <p-sortIcon field="phone"></p-sortIcon>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            Phone
+                            <p-columnFilter pSortableColumn="email" field="email" matchMode="in" display="menu">
+                                <p-sortIcon field="email"></p-sortIcon>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employee>
+                <tr>
+                    <td>
+                        <a class="text-primary" (click)="viewEmployeeDetails(employee.id)">{{employee.name}}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="image-text">{{employee.email}}</span>
+                    </td>
+                    <td>
+                        <span class="image-text">{{employee.phone}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No employees found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

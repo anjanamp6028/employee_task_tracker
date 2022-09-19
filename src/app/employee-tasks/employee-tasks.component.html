@@ -1,0 +1,82 @@
+<app-header [homeButton]="true"></app-header>
+<div class="animated fadeIn card main-content">
+    <div class="card-body">
+
+        <p-table #dt1 [value]="employeeTask" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading"
+            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['title','completed']">
+            <ng-template pTemplate="caption">
+                <div class="table-header">                  
+                    <span>Employee Tasks ({{employeeTask.length}})</span> 
+                    <span class="dataTables_filter p-input-icon-right">
+                        <i class="pi pi-search"></i>
+                        <input  type="text" class="inputSearch" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                    </span>
+                        <button class="btn btn-primary addTask" (click)="createTask()">
+                            <i class="fa fa-plus"></i> Add New Task</button>  
+                </div>
+              </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            Task Description
+                            <p-columnFilter pSortableColumn="title" type="text" field="title" display="menu"><p-sortIcon field="title"></p-sortIcon></p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            Status
+                            <p-columnFilter pSortableColumn="completed" type="text" field="completed" display="menu"><p-sortIcon field="completed"></p-sortIcon></p-columnFilter>
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-task>
+                <tr>
+                    <td>
+                        {{task.title}}
+                    </td>
+                    <td>
+                        <span [ngClass]="task.completed== 'Not Completed' ? 'badge rounded-pill bg-danger': 'badge rounded-pill bg-success'">{{task.completed}}</span>                      
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No tasks found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="lineModalLabel">Add Task</h3>
+              <button type="button" class="close" data-bs-dismiss="modal"><span aria-hidden="true">×</span><span
+                  class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Task Details</label>
+                    <br />
+                    <textarea class="col-md-12" rows="10" name="task" [(ngModel)]="task"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>            
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button data-bs-dismiss="modal" class="btn btn-warning">Close</button>
+              <button class="btn btn-primary" (click)="addTask()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

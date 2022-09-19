@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class="container-fluid">
+        <div class="logo-image">
+            <a>
+                <img src="https://logos-download.com/wp-content/uploads/2020/06/Fingent_Corporation_Logo.svg"
+                    class="img-fluid">
+            </a>
+        </div>
+    </div>
+    <ul class="navbar-nav">
+        <a class="pull-right" *ngIf="homeButton ==true" (click)="goHome()">
+            <i class="fa fa-home fa-2x"></i></a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="/dashboard"
+                id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" alt="Avatar" />
+                Hi, Admin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li>
+                    <a class="dropdown-item" (click)="logOut()">Logout</a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+</nav>

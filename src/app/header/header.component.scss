@@ -1,0 +1,33 @@
+.bg-dark {
+    background-color: #b1afaf !important;
+}
+
+.logo-image {
+    width: 177px;
+    height: 113px;
+    margin-top: -57px;
+    margin-left: 27px;
+}
+
+.rounded-circle {
+    margin-right: 4px;
+    width: 34px !important;
+    margin-top: 9px !important;
+}
+
+.navbar-nav {
+    .dropdown-menu-right {
+        right: auto;
+    }
+}
+
+.navbar-dark {
+    --bs-navbar-color: #f8f9fa;
+}
+
+.fa-home {
+    height: 30px;
+    width: 48px;
+    margin-top: 17px;
+    color: #767474;
+}
